@@ -1,8 +1,7 @@
 import torch
 from torch import nn
 
-from common.helpers import *
-
+from common import *
 
 class LogisticRegression(nn.Module):
     def __init__(self) -> None:
@@ -12,9 +11,9 @@ class LogisticRegression(nn.Module):
     def forward(self, input):
         return self.sigmoid(self.lin1(input))
 
-def logistic_regression():
+def logistic_regression(weight_tag=None):
     model = LogisticRegression()
-    state_dict = get_state_dict_from_git("main", "logistic_regression_random.pth")
-    print (state_dict)
-    model.load_state_dict(state_dict)
+    if weight_tag:
+        state_dict = get_state_dict_from_git_tag(weight_tag)
+        model.load_state_dict(state_dict)
     return model
