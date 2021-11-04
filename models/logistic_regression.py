@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 
-from common import *
+from utils import get_state_dict_from_git_tag
 
 class LogisticRegression(nn.Module):
     def __init__(self) -> None:
