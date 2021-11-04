@@ -12,6 +12,6 @@ class LogisticRegression(nn.Module):
 
 def logistic_regression():
     model = LogisticRegression()
-    state_dict = torch.load("weights/logistic_regression_random.pth")
+    state_dict = torch.hub.load_state_dict_from_url("https://github.com/msk-mind/luna-ml/raw/main/weights/logistic_regression_random.pth")
     model.load_state_dict(state_dict)
     return model
