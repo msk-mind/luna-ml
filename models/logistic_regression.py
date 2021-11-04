@@ -11,7 +11,7 @@ class LogisticRegression(nn.Module):
     def forward(self, input):
         return self.sigmoid(self.lin1(input))
 
-def logistic_regression(weight_tag=None):
+def logistic_regression_model(weight_tag=None):
     model = LogisticRegression()
     if weight_tag:
         state_dict = get_state_dict_from_git_tag(weight_tag)

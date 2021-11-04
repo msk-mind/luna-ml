@@ -2,5 +2,5 @@
 dependencies = ["torch", "torchvision"]
 
 # classification
-from models.logistic_regression import logistic_regression
-from models.tissue_tile_net import tissue_tile_net, tissue_tile_net_transform
+from models.logistic_regression import logistic_regression_model
+from models.tissue_tile_net import tissue_tile_net_model, tissue_tile_net_transform

@@ -1,6 +1,5 @@
 import torch
 
-    
 def get_state_dict_from_git_tag(weight_tag):
     tag, weight = weight_tag.split(':')
     print (f"Getting {weight} from {tag}")

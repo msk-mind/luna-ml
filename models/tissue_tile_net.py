@@ -31,7 +31,7 @@ def tissue_tile_net_transform ():
         torchvision.transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
     ])
 
-def tissue_tile_net (activation, num_classes, weight_tag=None):
+def tissue_tile_net_model (activation, num_classes, weight_tag=None):
     model = TissueTileNet(resnet18(), num_classes, activation=activation)
     if weight_tag:
         state_dict = get_state_dict_from_git_tag(weight_tag)
