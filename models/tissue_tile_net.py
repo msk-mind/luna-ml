@@ -35,5 +35,5 @@ def tissue_tile_net (activation, num_classes, weight_tag=None):
     model = TissueTileNet(resnet18(), num_classes, activation=activation)
     if weight_tag:
         state_dict = get_state_dict_from_git_tag(weight_tag)
-        model.load_state_dict(state_dict, map_location=torch.device('cpu'))
+        model.load_state_dict(state_dict)
     return model
