@@ -39,7 +39,7 @@ def tissue_tile_net_model (num_classes, weight_tag=None):
     return model
 
 def tissue_tile_net_model_5_class (weight_tag=None):
-    model = TissueTileNet(resnet18(), 5, activation=activation)
+    model = TissueTileNet(resnet18(), 5, activation=nn.Softmax(dim=1))
     if weight_tag:
         state_dict = get_state_dict_from_git_tag(weight_tag)
         model.load_state_dict(state_dict)
