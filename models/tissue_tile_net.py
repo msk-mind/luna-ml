@@ -40,7 +40,7 @@ def tissue_tile_net_model (num_classes, activation, weight_tag=None):
 
 def tissue_tile_net_model_5_class (weight_tag=None):
     model = TissueTileNet(resnet18(), 5, activation=torch.nn.Softmax(dim=1))
-    model.class_labels = {0:'Tumor', 1:'Stroma', 2:'TILs', 3:'Necrosis', 4:'Glass'}
+    model.class_labels = {0:'Stroma', 1:'Tumor', 2:'Glass', 3:'Necrosis', 4:'TILs'}
     if weight_tag:
         state_dict = get_state_dict_from_git_tag(weight_tag)
         model.load_state_dict(state_dict)
