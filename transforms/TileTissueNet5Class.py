@@ -13,6 +13,9 @@ class TissueTileNetTransformer(TorchTransformModel):
         # del kwargs['depth']
         self.model = TissueTileNet(resnet18(), 5, activation=torch.nn.Softmax())
         self.class_labels = {0:'Stroma', 1:'Tumor', 2:'Glass', 3:'Necrosis', 4:'TILs'}
+        
+        state_dict = get_state_dict_from_git_tag("main:tissue_net_2021-01-19_21.05.24-e17.pth")
+        self.model.load_state_dict(state_dict)
 
 
     def get_preprocess(self):
