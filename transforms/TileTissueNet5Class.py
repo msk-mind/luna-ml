@@ -6,6 +6,7 @@ from luna.pathology.analysis.ml import TorchTransformModel
 from models.tissue_tile_net import TissueTileNet
 
 from utils import get_state_dict_from_git_tag
+import numpy as np
 
 class TissueTileNetTransformer(TorchTransformModel):
 
@@ -30,5 +31,5 @@ class TissueTileNetTransformer(TorchTransformModel):
         print (out.shape)
         preds = torch.argmax(out, dim=1)
         print (preds.shape)
-        labels = [self.class_labels[val.item()] for val in torch.argmax(out, dim=1)]
+        labels = np.array([self.class_labels[val.item()] for val in preds])
         return labels
