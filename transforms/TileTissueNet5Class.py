@@ -27,5 +27,8 @@ class TissueTileNetTransformer(TorchTransformModel):
 
     def transform(self, X):
         out = self.model(X)
+        print (out.shape)
+        preds = torch.argmax(out, dim=1)
+        print (preds.shape)
         labels = [self.class_labels[val.item()] for val in torch.argmax(out, dim=1)]
         return labels
