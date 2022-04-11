@@ -2,7 +2,7 @@ import torch
 import torchvision
 from torchvision.models import resnet18, resnet34, resnet50, squeezenet1_1, vgg19_bn
 
-from luna.pathology.common.ml   import TorchTransformModel
+from luna.pathology.analysis.ml import TorchTransformModel
 from models.tissue_tile_net import TissueTileNet
 
 from utils import get_state_dict_from_git_tag
