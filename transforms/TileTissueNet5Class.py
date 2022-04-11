@@ -12,7 +12,7 @@ class TissueTileNetTransformer(TorchTransformModel):
     def __init__(self, use_weights=False):
         # del kwargs['depth']
         self.model = TissueTileNet(resnet18(), 5, activation=torch.nn.Softmax())
-        self.class_labels = {0:'Stroma', 1:'Tumor', 2:'Glass', 3:'Necrosis', 4:'TILs'}
+        self.class_labels = {0:'Stroma', 1:'Tumor', 2:'Glass', 3:'Necrosis', 4:'TILs', 5:'Classification'}
         
         state_dict = get_state_dict_from_git_tag("main:tissue_net_2021-01-19_21.05.24-e17.pth")
         self.model.load_state_dict(state_dict)
@@ -26,4 +26,7 @@ class TissueTileNetTransformer(TorchTransformModel):
 
     def transform(self, X):
         out = self.model(X)
+        labels = self.class_labels[val for val in torch.argmax(out)]
+        
+        print (labels)
         return out
