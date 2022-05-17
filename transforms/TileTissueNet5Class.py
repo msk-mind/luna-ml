@@ -12,7 +12,7 @@ class TissueTileNetTransformer(TorchTransformModel):
 
     def __init__(self, use_weights=False):
         # del kwargs['depth']
-        self.model = TissueTileNet(resnet18(), 5, activation=torch.nn.Softmax())
+        self.model = TissueTileNet(resnet18(), 5, activation=torch.nn.Softmax(dim=0))
         self.class_labels = {0:'Stroma', 1:'Tumor', 2:'Glass', 3:'Necrosis', 4:'TILs'}
         self.column_labels = {0:'Classification'}
         
@@ -30,4 +30,4 @@ class TissueTileNetTransformer(TorchTransformModel):
         out = self.model(X)
         preds = torch.argmax(out, dim=1)
         labels = np.array([self.class_labels[val.item()] for val in preds])
-        return labels
+        return labels.view( labels.shape[0], 1 )
