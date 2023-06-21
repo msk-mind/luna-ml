@@ -27,15 +27,19 @@ class TissueTileNet(torch.nn.Module):
 def tissue_tile_net_transform ():
     """ Transformer which generates a torch tensor compatible with the model """
     return torchvision.transforms.Compose([
-        torchvision.transforms.ToTensor(), 
+        torchvision.transforms.ToTensor(),
         torchvision.transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
     ])
 
-def tissue_tile_net_model (num_classes, activation, weight_tag=None):
+def tissue_tile_net_model (num_classes=4, activation=None, weight_tag=None):
     model = TissueTileNet(resnet18(), num_classes, activation=activation)
     if weight_tag:
         state_dict = get_state_dict_from_git_tag(weight_tag)
         model.load_state_dict(state_dict)
+    for idx, child in enumerate(model.model.children()):
+        if idx in [0, 1, 2, 3, 4, 5, 6, 7]: # 7 is last res block, 9 is fc layer
+            for param in child.parameters():
+                param.requires_grad = False
     return model
 
 def tissue_tile_net_model_5_class (weight_tag=None):
