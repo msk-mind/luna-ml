@@ -10,7 +10,7 @@ import numpy as np
 
 class TissueTileNetTransformer(TorchTransformModel):
 
-    def __init__(self, use_weights=False):
+    def __init__(self):
         # del kwargs['depth']
         self.model = TissueTileNet(resnet18(pretrained=True), 4, activation=torch.nn.Softmax(dim=1))
         self.class_labels = {
