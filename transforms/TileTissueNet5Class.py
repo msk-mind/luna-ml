@@ -12,17 +12,22 @@ class TissueTileNetTransformer(TorchTransformModel):
 
     def __init__(self, use_weights=False):
         # del kwargs['depth']
-        self.model = TissueTileNet(resnet18(), 5, activation=torch.nn.Softmax(dim=0))
-        self.class_labels = {0:'Stroma', 1:'Tumor', 2:'Glass', 3:'Necrosis', 4:'TILs'}
+        self.model = TissueTileNet(resnet18(pretrained=True), 4, activation=torch.nn.Softmax(dim=1))
+        self.class_labels = {
+                0: 'Stroma',
+                1: 'Tumor',
+                2: 'Fat',
+                3: 'Necrosis'
+                }
         self.column_labels = {0:'Classification'}
-        
-        state_dict = get_state_dict_from_git_tag("main:tissue_net_2021-01-19_21.05.24-e17.pth")
+
+        state_dict = get_state_dict_from_git_tag("1525-oncofusion-classifier:tissue_type_classifier_weights.torch")
         self.model.load_state_dict(state_dict)
 
 
     def get_preprocess(self):
         return torchvision.transforms.Compose([
-            torchvision.transforms.ToTensor(), 
+            torchvision.transforms.ToTensor(),
             torchvision.transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
         ])
 
