@@ -27,11 +27,11 @@ class TissueTileNet(torch.nn.Module):
 def tissue_tile_net_transform ():
     """ Transformer which generates a torch tensor compatible with the model """
     return torchvision.transforms.Compose([
-        torchvision.transforms.ToTensor(), 
+        torchvision.transforms.ToTensor(),
         torchvision.transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
     ])
 
-def tissue_tile_net_model (num_classes, activation, weight_tag=None):
+def tissue_tile_net_model (num_classes=4, activation=None, weight_tag=None):
     model = TissueTileNet(resnet18(), num_classes, activation=activation)
     if weight_tag:
         state_dict = get_state_dict_from_git_tag(weight_tag)
